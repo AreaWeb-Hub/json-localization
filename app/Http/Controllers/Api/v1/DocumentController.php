@@ -26,4 +26,10 @@ class DocumentController extends Controller
                 ->list()
         );
     }
+
+    public function destroy(\App\Models\Document $document)
+    {
+        $document->delete();
+        return responseOk();
+    }
 }

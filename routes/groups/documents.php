@@ -13,4 +13,7 @@ Route::controller(DocumentController::class)
     Route::get('/', 'list')
         ->name('documents.list')
         ->middleware('document.list.access');
+    Route::delete('/{document}', 'destroy')
+        ->name('documents.list')
+        ->middleware('document.access');
 });
