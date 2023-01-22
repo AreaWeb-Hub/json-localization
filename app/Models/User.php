@@ -28,6 +28,6 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'company_name' => AccountType::class
+        'account_type' => AccountType::class
     ];
 }
