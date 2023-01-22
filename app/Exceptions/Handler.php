@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\Account\InvalidUserCredentialsException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -43,6 +44,13 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (InvalidUserCredentialsException $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => __("exceptions.{$e->getMessage()}")
+            ]);
+        });
+
         $this->reportable(function (Throwable $e) {
             //
         });

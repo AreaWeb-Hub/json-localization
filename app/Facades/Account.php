@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \App\Models\User create(array $data)
+ * @method static string signIn(string $email, string $password)
  *
  * @see \App\Services\Account\AccountService
  */
