@@ -13,8 +13,8 @@ class LanguageFactory extends Factory
     public function definition()
     {
         return [
-            'name' => Str::upper(fake()->word),
-            'locale' => fake()->languageCode()
+            'name' => fake()->word,
+            'locale' => fake()->locale()
         ];
     }
 }
