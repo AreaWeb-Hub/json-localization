@@ -6,25 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProjectRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'name' => ['nullable', 'string', 'max:100'],
+            'description' => ['nullable', 'string', 'max:300'],
+            'languages' => ['nullable', 'array', 'required_array_keys:source,target'],
+            'languages.source' => ['nullable', 'int', 'exists:languages,id'],
+            'languages.target' => ['nullable'],
+            'languages.target.*' => ['int', 'exists:languages,id'],
+            'settings.useMachineTranslate' => ['nullable', 'bool']
         ];
     }
 }

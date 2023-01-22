@@ -32,7 +32,10 @@ class ProjectController extends Controller
 
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        return new ProjectResource(
+            ProjectService::setProject($project)
+                ->update($request->validated())
+        );
     }
 
     public function destroy(Project $project)
