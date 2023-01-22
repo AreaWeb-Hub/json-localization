@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Document\AddDocumentRequest;
+use App\Http\Requests\Document\GetDocumentRequest;
 use App\Http\Requests\Document\GetDocumentsRequest;
 use App\Http\Requests\Document\ImportTranslationsRequest;
 use App\Http\Resources\Document\MinifiedDocumentResource;
@@ -37,6 +38,12 @@ class DocumentController extends Controller
             );
 
         return responseOk();
+    }
+
+    public function show(\App\Models\Document $document, GetDocumentRequest $request)
+    {
+        return Document::setDocument($document)
+            ->getTranslations($request->get('lang'));
     }
 
     public function destroy(\App\Models\Document $document)

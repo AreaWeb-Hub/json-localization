@@ -19,4 +19,7 @@ Route::controller(DocumentController::class)
     Route::post('/{document}/import', 'import')
         ->name('documents.import')
         ->middleware('document.access');
+    Route::get('/{document}', 'show')
+        ->name('documents.show')
+        ->middleware('document.access');
 });

@@ -66,11 +66,49 @@ class DocumentService
         ]);
     }
 
+    public function getTranslations(int $lang)
+    {
+        $data = [
+            'name' => $this->document->name,
+            'data' => []
+        ];
+
+        $sourceData = Arr::map($this->document->data, function ($el) {
+            return [
+                'key' => $el['key'],
+                'original' => $el['value'],
+                'translation' => ''
+            ];
+        });
+
+        $translations = Translation::query()
+            ->where('language_id', $lang)
+            ->where('document_id', $this->document->id)
+            ->first();
+
+        if (!is_null($translations)) {
+            foreach ($sourceData as $item) {
+                $targetItem = Arr::first($translations->data, function ($el) use ($item) {
+                    return $el['key'] === $item['key'];
+                });
+
+                if (!is_null($targetItem)) {
+                    $item['translation'] = $targetItem['value'];
+                }
+
+                $data['data'][] = $item;
+            }
+        } else {
+            $data['data'] = $sourceData;
+        }
+
+        return $data;
+    }
+
     public function list(): Collection
     {
         return $this->project->documents()->get();
     }
-
 
     public function setDocument(Document $document): DocumentService
     {
