@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
+use App\Http\Resources\Project\MinifiedProjectResource;
 use App\Http\Resources\Project\ProjectResource;
 use App\Models\Project;
 use App\Facades\Project as ProjectService;
@@ -13,7 +14,11 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        //
+        return MinifiedProjectResource::collection(
+            Project::query()
+                ->where('user_id', authUserId())
+                ->get()
+        );
     }
 
     public function store(StoreProjectRequest $request)
