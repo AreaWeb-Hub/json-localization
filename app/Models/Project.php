@@ -44,4 +44,9 @@ class Project extends Model
     {
         return $this->hasMany(Document::class);
     }
+
+    public function hasAccess(): bool
+    {
+        return $this->user_id === authUserId();
+    }
 }
