@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Document;
+    use App\Models\Document;
 use App\Models\Language;
 use App\Models\Project;
 use App\Models\User;
