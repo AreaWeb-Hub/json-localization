@@ -10,4 +10,7 @@ Route::controller(DocumentController::class)
     Route::post('/', 'add')
         ->name('documents.add')
         ->middleware('document.add.access');
+    Route::get('/', 'list')
+        ->name('documents.list')
+        ->middleware('document.list.access');
 });
