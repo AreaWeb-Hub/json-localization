@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'InvalidUserCredentials' => 'Invalid user credentials'
+    'InvalidUserCredentials' => 'Invalid user credentials',
+    'NoAccessToOperation' => 'No access to operation',
 ];

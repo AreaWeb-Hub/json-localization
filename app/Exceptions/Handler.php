@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Exceptions\Account\InvalidUserCredentialsException;
+use App\Exceptions\Account\NoAccessToOperationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -48,7 +49,14 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'status' => 'failed',
                 'message' => __("exceptions.{$e->getMessage()}")
-            ]);
+            ], 401);
+        });
+
+        $this->renderable(function (NoAccessToOperationException $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => __("exceptions.{$e->getMessage()}")
+            ], 403);
         });
 
         $this->reportable(function (Throwable $e) {

@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'InvalidUserCredentials' => 'Неверный логин или пароль пользователя'
+    'InvalidUserCredentials' => 'Неверный логин или пароль пользователя',
+    'NoAccessToOperation' => 'У вас нет прав для этой операции',
 ];
