@@ -14,6 +14,9 @@ Route::controller(DocumentController::class)
         ->name('documents.list')
         ->middleware('document.list.access');
     Route::delete('/{document}', 'destroy')
-        ->name('documents.list')
+        ->name('documents.destroy')
+        ->middleware('document.access');
+    Route::post('/{document}/import', 'import')
+        ->name('documents.import')
         ->middleware('document.access');
 });
