@@ -18,7 +18,12 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->tinyText('description')->nullable();
             $table->foreignId('source_language_id')
+                ->nullable()
                 ->constrained('languages')
+                ->cascadeOnDelete();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
                 ->cascadeOnDelete();
             $table->json('target_language_ids')->nullable();
             $table->boolean('use_machine_translate')->default(false);

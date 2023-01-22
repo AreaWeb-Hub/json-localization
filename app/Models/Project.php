@@ -12,13 +12,20 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'source_language_id', 'target_language_ids', 'use_machine_translate'
+        'name', 'description',
+        'source_language_id', 'target_language_ids',
+        'use_machine_translate', 'user_id'
     ];
 
     protected $casts = [
         'target_language_ids' => 'array',
         'use_machine_translate' => 'bool'
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function sourceLanguage(): BelongsTo
     {

@@ -8,3 +8,8 @@ function responseOk(): JsonResponse
         'status' => 'success'
     ]);
 }
+
+function authUserId(): ?int
+{
+    return auth()->id();
+}
