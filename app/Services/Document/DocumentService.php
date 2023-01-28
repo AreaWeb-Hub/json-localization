@@ -64,9 +64,11 @@ class DocumentService
         ], [
             'data' => $translatedData
         ]);
+
+        $this->updateDocumentProgress();
     }
 
-    public function getTranslations(int $lang)
+    public function getTranslations(int $lang): array
     {
         $data = [
             'name' => $this->document->name,
@@ -114,5 +116,17 @@ class DocumentService
     {
         $this->document = $document;
         return $this;
+    }
+
+    private function updateDocumentProgress(): void
+    {
+        $total = $this->document->totalSegments();
+        $translated = $this->document->translatedSegmentsCount();
+
+        $progress = ($translated / $total) * 100;
+
+        $this->document->update([
+            'progress' => $progress
+        ]);
     }
 }
