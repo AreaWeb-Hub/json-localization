@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 
 class Project extends Model
 {
@@ -48,5 +49,10 @@ class Project extends Model
     public function hasAccess(): bool
     {
         return $this->user_id === authUserId();
+    }
+
+    public function hasLang(int $languageId): bool
+    {
+        return in_array($languageId, $this->target_language_ids);
     }
 }

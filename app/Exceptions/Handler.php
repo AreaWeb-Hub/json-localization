@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Exceptions\Account\InvalidUserCredentialsException;
 use App\Exceptions\Account\NoAccessToOperationException;
+use App\Exceptions\Project\InvalidLanguageException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -57,6 +58,13 @@ class Handler extends ExceptionHandler
                 'status' => 'failed',
                 'message' => __("exceptions.{$e->getMessage()}")
             ], 403);
+        });
+
+        $this->renderable(function (InvalidLanguageException $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => __("exceptions.{$e->getMessage()}")
+            ], 400);
         });
 
         $this->reportable(function (Throwable $e) {

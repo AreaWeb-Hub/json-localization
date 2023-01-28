@@ -18,8 +18,8 @@ Route::controller(DocumentController::class)
         ->middleware('document.access');
     Route::post('/{document}/import', 'import')
         ->name('documents.import')
-        ->middleware('document.access');
+        ->middleware(['document.access', 'project.lang']);
     Route::get('/{document}', 'show')
         ->name('documents.show')
-        ->middleware('document.access');
+        ->middleware(['document.access', 'project.lang']);
 });
